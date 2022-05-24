@@ -1,8 +1,17 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:learn_app/app/data/services/storage/services.dart';
+import 'package:learn_app/app/modules/home/view.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'dataMock.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+  await Get.putAsync(()=> StorageService().init());
   runApp(MyApp());
 }
 
@@ -15,59 +24,57 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          leading: const Icon(Icons.menu),
-          title: const Center(child: Text("Flutter Learn App")),
-          actions: const [Icon(Icons.settings)],
-        ),
-        body: SafeArea(
-          child: Container(
-            // color: Colors.blueAccent,
-            child: ListView.separated(
-              padding: EdgeInsets.all(16),
-              // shrinkWrap: true,
-              itemCount: dataFromMock.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Image.network(dataFromMock[index]['url']!),
-                  title: Text(dataFromMock[index]['name']!, style: const TextStyle(color: Colors.blueAccent, fontSize: 20)),
-                  subtitle: Text(dataFromMock[index]['age']!),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const Divider();
-              },
-            ),
-          ),
-          // child: GridView.count(
-          //   crossAxisCount: 2,
-          //   mainAxisSpacing: 10,
-          //   crossAxisSpacing: 10,
-          //   childAspectRatio: 2,
-          //   children: [
-          //     Container(
-          //       color: Colors.amber[100],
-          //     ),
-          //     Container(
-          //       color: Colors.amber[200],
-          //     ),
-          //     Container(
-          //       color: Colors.amber[300],
-          //     ),
-          //     Container(
-          //       color: Colors.amber[400],
-          //     )
-          //   ],
-          // ),
-          // child: Center(child: _stack()),
-        ),
-      ),
+    return const GetMaterialApp(
+      title: 'Flutter ToDoList',
+      // home: Scaffold(
+      //   appBar: AppBar(
+      //     leading: const Icon(Icons.menu),
+      //     title: const Center(child: Text("Flutter Learn App")),
+      //     actions: const [Icon(Icons.settings)],
+      //   ),
+      //   body: SafeArea(
+      //     child: Container(
+      //       // color: Colors.blueAccent,
+      //       child: ListView.separated(
+      //         padding: EdgeInsets.all(16),
+      //         // shrinkWrap: true,
+      //         itemCount: dataFromMock.length,
+      //         itemBuilder: (BuildContext context, int index) {
+      //           return ListTile(
+      //             leading: Image.network(dataFromMock[index]['url']!),
+      //             title: Text(dataFromMock[index]['name']!, style: const TextStyle(color: Colors.blueAccent, fontSize: 20)),
+      //             subtitle: Text(dataFromMock[index]['age']!),
+      //           );
+      //         },
+      //         separatorBuilder: (BuildContext context, int index) {
+      //           return const Divider();
+      //         },
+      //       ),
+      //     ),
+      //     // child: GridView.count(
+      //     //   crossAxisCount: 2,
+      //     //   mainAxisSpacing: 10,
+      //     //   crossAxisSpacing: 10,
+      //     //   childAspectRatio: 2,
+      //     //   children: [
+      //     //     Container(
+      //     //       color: Colors.amber[100],
+      //     //     ),
+      //     //     Container(
+      //     //       color: Colors.amber[200],
+      //     //     ),
+      //     //     Container(
+      //     //       color: Colors.amber[300],
+      //     //     ),
+      //     //     Container(
+      //     //       color: Colors.amber[400],
+      //     //     )
+      //     //   ],
+      //     // ),
+      //     // child: Center(child: _stack()),
+      //   ),
+      // ),
+      home: HomePage(),
     );
   }
 
@@ -128,5 +135,3 @@ class MyApp extends StatelessWidget {
 //     await Future.delayed(Duration(seconds: 2));
 //   }
 // }
-
-

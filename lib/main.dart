@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:learn_app/app/data/services/storage/services.dart';
+import 'package:learn_app/app/modules/home/binding.dart';
 import 'package:learn_app/app/modules/home/view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'dataMock.dart';
 
@@ -24,8 +26,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Flutter ToDoList',
+      debugShowCheckedModeBanner: false,
       // home: Scaffold(
       //   appBar: AppBar(
       //     leading: const Icon(Icons.menu),
@@ -74,7 +77,9 @@ class MyApp extends StatelessWidget {
       //     // child: Center(child: _stack()),
       //   ),
       // ),
-      home: HomePage(),
+      home: const HomePage(),
+      initialBinding: HomeBinding(),
+      builder: EasyLoading.init(),
     );
   }
 
